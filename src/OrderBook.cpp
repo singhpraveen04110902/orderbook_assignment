@@ -9,7 +9,7 @@
 #include <iomanip>
 #include <limits>
 
-OrderBook::OrderBook(uint16_t lSize,double bPrice) : lotSize(lSize),special_quotation_price(bPrice) {}
+OrderBook::OrderBook(uint16_t lSize, double bPrice) : lotSize(lSize), special_quotation_price(bPrice) {}
 
 void OrderBook::onNewOrder(OrderType type, OrderSide side, double limit_price, uint64_t order_qty, Client *client, uint64_t cl_order_id)
 {
@@ -46,7 +46,7 @@ bool OrderBook::is_valid_order(OrderType type, OrderSide side, double limit_pric
         return false;
     if (type == OrderType::LIMIT && limit_price <= 0)
         return false;
-    if (order_qty <= 0 || order_qty%lotSize)
+    if (order_qty <= 0 || order_qty % lotSize)
         return false;
     if (!client)
         return false;
@@ -185,7 +185,7 @@ void OrderBook::sendExecution(Order *sourceOrder, Order *otherOrder, double exec
 void OrderBook::printOrderBook()
 {
     std::cout << "====== OrderBook SnapShot ======\n";
-    std::cout << "Bid"  << std::right << std::setw(20) <<  "Ask\n";
+    std::cout << "Bid" << std::right << std::setw(20) << "Ask\n";
     printLimits(sellTree.crbegin(), sellTree.crend(), 23);
     printLimits(buyTree.cbegin(), buyTree.cend(), 0);
     std::cout << "=================================\n";
@@ -196,7 +196,7 @@ void OrderBook::printLimits(limitTreeIterator begin, limitTreeIterator end, std:
     while (begin != end)
     {
         auto limit = begin->first;
-        std::cout << std::left <<std::setfill(' ') << std::setw(formatter);
+        std::cout << std::left << std::setfill(' ') << std::setw(formatter);
         if (limit->limit_price == 0 || limit->limit_price == std::numeric_limits<double>::max())
             std::cout << 'M';
         else
@@ -274,9 +274,10 @@ void OrderBook::printDetailedBook(limitTreeIterator begin, limitTreeIterator end
     }
 }
 
+
+
 OrderBook::~OrderBook()
 {
     for (auto it : available_orders)
-         delete it.second;
+        delete it.second;
 }
-
