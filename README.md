@@ -27,7 +27,7 @@ How to test
 -> orders are executed in limit priority followed by arival time priority . Market orders have higher priotity than limit orders and orders are Market limit are executed in arival time priority.   
 
 OrderBook Complexity.   
-Add new Order to Book : First Order at a give limit = Log(N) , subsequent orders at same limit O(1) . Where N is number of levels in order book at side of addition
+Add new Order to Book : First Order at a give limit = Log(N) , subsequent orders at same limit O(1) . Where N is number of levels in order book at side of addition   
 Cancel a order : O(1)  
 generate execution : O(1)   
 get best bid : O(1)  
