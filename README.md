@@ -1,11 +1,11 @@
 Project distribution
--> ./include : all headers for main project. 
--> ./src : source for main project. 
--> ./lib : contains the lib liborderBook.a which can be included to utilize the interfaces offered by orderBook. 
--> ./bin : empty. 
--> ./test/src : source for testing orderBook interfaces. 
--> ./test/include : empty. 
--> ./test/bin/tester : test executable produced after making the project. 
+-> ./include : all headers for main project.   
+-> ./src : source for main project.   
+-> ./lib : contains the lib liborderBook.a which can be included to utilize the interfaces offered by orderBook.   
+-> ./bin : empty.   
+-> ./test/src : source for testing orderBook interfaces.   
+-> ./test/include : empty.   
+-> ./test/bin/tester : test executable produced after making the project.   
 
 How to make the project.    
 -> cd ./src/    
