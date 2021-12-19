@@ -173,7 +173,7 @@ std::size_t LimitTree<side>::size()
 }
 
 template <OrderSide side>
-LimitTree<side>::LimitTree(LimitTree<side> &&other) noexcept : tree(std::move(other.tree)),available_limits(std::move(other.tree))
+LimitTree<side>::LimitTree(LimitTree<side> &&other) noexcept : tree(std::move(other.tree)),available_limits(std::move(other.available_limits))
 {
 }
 
