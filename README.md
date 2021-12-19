@@ -7,7 +7,7 @@ Project distribution
 -> ./test/include : empty. 
 -> ./test/bin/tester : test executable produced after making the project. 
 
-How to make the project. 
+How to make the project.    
 -> cd ./src/    
 -> make        
 this will produce liborderBook.a in ./lib/      
