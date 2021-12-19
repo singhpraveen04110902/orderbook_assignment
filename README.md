@@ -38,7 +38,7 @@ OrderBook API.
 Order Book provides following public interfaces.    
   void onNewOrder(OrderType type, OrderSide side, double limit_price, uint64_t order_qty, Client *client, uint64_t cl_order_id);    
         Most parameters are self explainatory .    
-        Client is an abstract call with following pure virtual function.    
+        Client is an abstract class with following pure virtual function.    
         virtual void receiveMessage(const Message& msg) const = 0;    
         Order book uses this variable to call back and send response back to client.    
 
