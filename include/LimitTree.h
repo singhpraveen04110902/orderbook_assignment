@@ -25,16 +25,16 @@ public:
     double get_best_price();
     typename std::map<Limit *, Order *, LimitTreeCompare<side>>::iterator begin();
     typename std::map<Limit *, Order *, LimitTreeCompare<side>>::iterator end();
-    const typename  std::map<Limit *, Order *, LimitTreeCompare<side>>::iterator cbegin();
-    const typename  std::map<Limit *, Order *, LimitTreeCompare<side>>::iterator cend();
-    const typename  std::map<Limit *, Order *, LimitTreeCompare<side>>::const_reverse_iterator crbegin();
-    const typename  std::map<Limit *, Order *, LimitTreeCompare<side>>::const_reverse_iterator crend();
+    const typename std::map<Limit *, Order *, LimitTreeCompare<side>>::iterator cbegin();
+    const typename std::map<Limit *, Order *, LimitTreeCompare<side>>::iterator cend();
+    const typename std::map<Limit *, Order *, LimitTreeCompare<side>>::const_reverse_iterator crbegin();
+    const typename std::map<Limit *, Order *, LimitTreeCompare<side>>::const_reverse_iterator crend();
     std::size_t size();
     LimitTree() = default;
-    LimitTree(const LimitTree& ) = delete;
-    LimitTree& operator=(const LimitTree&) = delete;
-    LimitTree (LimitTree &&) noexcept = default;
-    LimitTree& operator=(LimitTree &&) noexcept = default;
+    LimitTree(const LimitTree &) = delete;
+    LimitTree<side> &operator=(const LimitTree &) = delete;
+    LimitTree(LimitTree<side> &&) noexcept ;
+    LimitTree<side> &operator=(LimitTree<side> &&) noexcept;
     ~LimitTree();
 };
 
@@ -113,7 +113,6 @@ void LimitTree<side>::remove_order(Order *orignal_order)
     }
 }
 
-
 template <OrderSide side>
 double LimitTree<side>::get_best_price()
 {
@@ -144,25 +143,25 @@ typename std::map<Limit *, Order *, LimitTreeCompare<side>>::iterator LimitTree<
 }
 
 template <OrderSide side>
-const typename  std::map<Limit *, Order *, LimitTreeCompare<side>>::iterator LimitTree<side>::cbegin()
+const typename std::map<Limit *, Order *, LimitTreeCompare<side>>::iterator LimitTree<side>::cbegin()
 {
     return tree.begin();
 }
 
 template <OrderSide side>
-const typename  std::map<Limit *, Order *, LimitTreeCompare<side>>::iterator LimitTree<side>::cend()
+const typename std::map<Limit *, Order *, LimitTreeCompare<side>>::iterator LimitTree<side>::cend()
 {
     return tree.end();
 }
 
 template <OrderSide side>
-const typename  std::map<Limit *, Order *, LimitTreeCompare<side>>::const_reverse_iterator LimitTree<side>::crbegin()
+const typename std::map<Limit *, Order *, LimitTreeCompare<side>>::const_reverse_iterator LimitTree<side>::crbegin()
 {
     return tree.crbegin();
 }
 
 template <OrderSide side>
-const typename  std::map<Limit *, Order *, LimitTreeCompare<side>>::const_reverse_iterator LimitTree<side>::crend()
+const typename std::map<Limit *, Order *, LimitTreeCompare<side>>::const_reverse_iterator LimitTree<side>::crend()
 {
     return tree.crend();
 }
@@ -174,8 +173,28 @@ std::size_t LimitTree<side>::size()
 }
 
 template <OrderSide side>
+LimitTree<side>::LimitTree(LimitTree<side> &&other) noexcept : tree(std::move(other.tree)),available_limits(std::move(other.tree))
+{
+}
+
+template <OrderSide side>
+ LimitTree<side>& LimitTree<side>::operator=(LimitTree<side> &&rhs) noexcept
+ {
+     if (&rhs != this)
+     {
+         for (auto pair : available_limits) delete pair.second;
+         available_limits = std::move(rhs.available_limits);
+         tree = std::move(rhs.tree);
+     }
+     return *this;
+ }
+
+template <OrderSide side>
 LimitTree<side>::~LimitTree()
 {
     for (auto it : available_limits)
-          delete it.second;
+        delete it.second;
 }
+
+
+

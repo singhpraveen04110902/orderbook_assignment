@@ -274,7 +274,24 @@ void OrderBook::printDetailedBook(limitTreeIterator begin, limitTreeIterator end
     }
 }
 
-
+  OrderBook::OrderBook(OrderBook &&other) noexcept 
+  {
+      buyTree = std::move(other.buyTree);
+      sellTree = std::move(other.sellTree);
+      special_quotation_price = other.special_quotation_price;
+      available_orders = std::move(other.available_orders);
+  }
+  OrderBook& OrderBook::operator=(OrderBook &&other) noexcept 
+  {
+       if (&other != this)
+       {
+           for (auto pair : available_orders) delete pair.second;
+           buyTree = std::move(other.buyTree);
+           sellTree = std::move(other.sellTree);
+           available_orders = std::move(other.available_orders);
+       }
+       return *this;
+  }
 
 OrderBook::~OrderBook()
 {

@@ -13,7 +13,8 @@
 class OrderBook final
 {
 public:
-
+  // using buylimitTreeIterator = std::map<Limit *, Order *, LimitTreeCompare<OrderSide::BUY>>::iterator;
+  // using selllimitTreeIterator = std::map<Limit *, Order *, LimitTreeCompare<OrderSide::SELL>>::iterator;
     using limitTreeIterator = std::map<Limit *, Order *>::iterator;
     using limitTreeReverseIterator = std::map<Limit *, Order *>::const_reverse_iterator;
 
@@ -45,8 +46,8 @@ public:
   OrderBook(uint16_t lSize,double bPrice);
   OrderBook(const OrderBook& ) = delete;
   OrderBook& operator=(const OrderBook&) = delete;
-  OrderBook(OrderBook &&other) noexcept = default;
-  OrderBook& operator=(OrderBook &&other) noexcept = default;
+  OrderBook(OrderBook &&other) noexcept ;
+  OrderBook& operator=(OrderBook &&other) noexcept ;
   ~OrderBook();
 };
 
