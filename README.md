@@ -1,4 +1,4 @@
-Project distribution
+Project distribution.  
 -> ./include : all headers for main project.   
 -> ./src : source for main project.   
 -> ./lib : contains the lib liborderBook.a which can be included to utilize the interfaces offered by orderBook.   
